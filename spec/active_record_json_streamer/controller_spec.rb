@@ -25,8 +25,10 @@ RSpec.describe ActiveRecordJsonStreamer::Controller do
     expect(headers['Content-Disposition']).to match(/attachment; filename="records\.json"/)
     expect(headers['Cache-Control']).to eq('no-cache')
 
-    body_content = String.new
-    controller.response.body.each { |chunk| body_content << chunk }
+    expect(controller.response_body).to respond_to(:each)
+
+    raw_body = controller.response.body
+    body_content = raw_body.is_a?(String) ? raw_body : raw_body.to_a.join
     parsed = JSON.parse(body_content)
 
     expect(parsed).to eq([{ 'name' => 'Test Entry' }])
