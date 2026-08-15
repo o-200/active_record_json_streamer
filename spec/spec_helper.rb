@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require "active_record"
-require "action_pack"
-require "action_controller"
-require "sqlite3"
-require "rspec"
+require 'active_record'
+require 'action_pack'
+require 'action_controller'
+require 'sqlite3'
+require 'rspec'
 
-require_relative "../lib/active_record_json_streamer"
+require_relative '../lib/active_record_json_streamer'
 
 ActiveRecord::Base.establish_connection(
-  adapter: "sqlite3",
-  database: ":memory:"
+  adapter: 'sqlite3',
+  database: ':memory:'
 )
 
 ActiveRecord::Schema.define do
